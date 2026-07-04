@@ -38,7 +38,7 @@ export async function GET() {
       stats: {
         hasPreferences: !!existing,
         ingredientCount,
-        database: "postgresql",
+        database: "sqlite",
       },
     });
   } catch (error) {

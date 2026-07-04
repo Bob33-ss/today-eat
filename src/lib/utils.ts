@@ -1,5 +1,3 @@
-import { type ClassValue } from "react";
-
 /**
  * 简易 cn 函数（条件 class 合并）
  */
