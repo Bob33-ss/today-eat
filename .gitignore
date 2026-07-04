@@ -37,3 +37,14 @@ yarn-error.log*
 
 # prisma
 prisma/migrations/
+prisma/dev.db
+
+# logs
+*.log
+next-dev*.log
+next-server*.log
+
+# test files
+test-*.ts
+test-*.js
+test-*.mjs

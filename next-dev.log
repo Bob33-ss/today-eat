@@ -1,9 +1,0 @@
-▲ Next.js 16.2.10 (webpack)
-- Local:         http://localhost:3000
-- Network:       http://172.16.100.2:3000
-- Environments: .env
-✓ Ready in 1606ms
-⚠ Attempted to load @next/swc-win32-x64-msvc, but an error occurred: \\?\C:\Users\OseasyVM\today-eat\node_modules\@next\swc-win32-x64-msvc\next-swc.win32-x64-msvc.node is not a valid Win32 application.
-\\?\C:\Users\OseasyVM\today-eat\node_modules\@next\swc-win32-x64-msvc\next-swc.win32-x64-msvc.node
-  Skipping creating a lockfile at C:\Users\OseasyVM\today-eat\.next\dev\lock because we're using WASM bindings
-
