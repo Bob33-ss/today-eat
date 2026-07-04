@@ -1,0 +1,66 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Ingredient {
+  id        Int      @id @default(autoincrement())
+  name      String   // 食材名称
+  category  String   // 分类: 蔬菜/肉类/海鲜/豆制品/蛋奶/主食/调味品/其他
+  quantity  String   // 数量描述: "2个" / "200g" / "半颗"
+  expiryAt  DateTime? // 过期时间(冰箱剩菜追踪)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  menuItems MenuItem[]
+}
+
+model Preference {
+  id        Int      @id @default(autoincrement())
+  // 饮食限制
+  dietType  String   @default("none") // none / vegetarian / vegan / gluten-free
+  // 禁忌食材，逗号分隔
+  avoidFoods String  @default("")
+  // 偏好的菜系，逗号分隔
+  cuisines  String   @default("中餐") // 中餐/西餐/日料/韩餐/东南亚/轻食
+  // 辣度 0-5
+  spiceLevel Int     @default(0)
+  // 烹饪时间偏好：15/30/60 分钟
+  maxCookTime Int    @default(30)
+  // 每餐菜品数量
+  dishCount  Int     @default(2)
+  // 是否利用剩菜
+  useLeftovers Boolean @default(true)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @default(now())
+}
+
+model Menu {
+  id            Int      @id @default(autoincrement())
+  name          String   // 菜单名称/日期: "7月4日晚餐"
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @default(now())
+
+  menuItems     MenuItem[]
+}
+
+model MenuItem {
+  id         Int      @id @default(autoincrement())
+  menuId     Int
+  menu       Menu     @relation(fields: [menuId], references: [id], onDelete: Cascade)
+  ingredientId Int?
+  ingredient Ingredient? @relation(fields: [ingredientId], references: [id])
+  mealName   String   // 菜名: "番茄炒蛋"
+  description String   // 简要描述
+  cookTime   Int      @default(15) // 烹饪时间(分钟)
+  difficulty String   @default("简单") // 简单/中等/复杂
+  ingredients String   // 所需食材列表(逗号分隔)
+  steps      String   // 步骤描述
+
+  createdAt  DateTime @default(now())
+}
